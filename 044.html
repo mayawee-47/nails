@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>maya gal nails — Nail Designer</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
+
+:root{
+  --red:#a90d18;
+  --dark:#551d22;
+  --pink:#fff5f5;
+  --line:#efd9dc;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#fffafa;
+  color:var(--dark);
+  font-family:"Noto Sans Thai",sans-serif;
+}
+
+header{
+  height:70px;
+  background:var(--red);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 7%;
+  box-shadow:0 4px 18px #700a1420;
+}
+
+.logo{
+  font-family:Georgia,serif;
+  font-size:31px;
+  font-weight:bold;
+}
+
+.logo small{
+  font-family:cursive;
+  font-size:18px;
+  margin-left:8px;
+}
+
+main{
+  width:min(900px,94%);
+  margin:auto;
+  padding:30px 0 60px;
+}
+
+.intro{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.intro h1{
+  margin:4px 0;
+  color:#8f0a14;
+  font-size:clamp(28px,5vw,44px);
+}
+
+.intro p{
+  color:#7d6265;
+  margin:5px;
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:6px;
+  margin-bottom:20px;
+}
+
+.step{
+  font-size:11px;
+  color:#a99194;
+  text-align:center;
+}
+
+.step b{
+  display:grid;
+  place-items:center;
+  width:29px;
+  height:29px;
+  margin:auto;
+  border-radius:50%;
+  background:#eadbdd;
+}
+
+.step.active,
+.step.done{
+  color:var(--red);
+}
+
+.step.active b,
+.step.done b{
+  background:var(--red);
+  color:white;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 15px 45px #78101a12;
+}
+
+.card h2{
+  text-align:center;
+  margin:0 0 20px;
+}
+
+.preview{
+  background:#f8ecea;
+  border-radius:19px;
+  min-height:210px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:10px;
+  padding:25px;
+  margin-bottom:20px;
+}
+
+.finger{
+  width:58px;
+  height:135px;
+  background:#e6ad97;
+  border-radius:32px 32px 12px 12px;
+  padding-top:5px;
+  display:flex;
+  justify-content:center;
+}
+
+.nail{
+  position:relative;
+  width:42px;
+  height:75px;
+  background:#a90d18;
+  border:2px solid #fff8;
+  border-radius:21px 21px 7px 7px;
+  box-shadow:inset -5px -5px 10px #0002;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-size:22px;
+  overflow:hidden;
+}
+
+.nail.square{
+  border-radius:5px;
+}
+
+.nail.round{
+  border-radius:50% 50% 18% 18%;
+}
+
+.nail.almond{
+  border-radius:55% 55% 15% 15%;
+  transform:scaleX(.86);
+}
+
+.nail.coffin{
+  clip-path:polygon(12% 0,88% 0,100% 100%,0 100%);
+  border-radius:6px;
+}
+
+.nail.stiletto{
+  clip-path:polygon(30% 0,70% 0,100% 100%,0 100%);
+  border-radius:15px 15px 0 0;
+}
+
+.nail.oval{
+  border-radius:50% 50% 22% 22%;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.grid.five{
+  grid-template-columns:repeat(5,1fr);
+}
+
+button{
+  font:inherit;
+}
+
+.option{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:14px;
+  padding:12px;
+  cursor:pointer;
+  color:var(--dark);
+}
+
+.option:hover,
+.option.selected{
+  border-color:var(--red);
+  box-shadow:0 6px 15px #a90d1820;
+}
+
+.shape-icon{
+  width:30px;
+  height:45px;
+  background:#e98f99;
+  display:block;
+  margin:auto auto 7px;
+  border:1px solid #bf505a;
+}
+
+.shape-icon.square{
+  border-radius:4px;
+}
+
+.shape-icon.oval{
+  border-radius:50% 50% 20% 20%;
+}
+
+.shape-icon.almond{
+  border-radius:55% 55% 15% 15%;
+  transform:scaleX(.8);
+}
+
+.shape-icon.coffin{
+  clip-path:polygon(12% 0,88% 0,100% 100%,0 100%);
+}
+
+.shape-icon.round{
+  border-radius:50% 50% 20% 20%;
+}
+
+.shape-icon.stiletto{
+  clip-path:polygon(30% 0,70% 0,100% 100%,0 100%);
+  border-radius:15px 15px 0 0;
+}
+
+.swatches{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:12px;
+}
+
+.swatch{
+  width:47px;
+  height:47px;
+  border-radius:50%;
+  border:3px solid white;
+  box-shadow:0 0 0 1px #e6ced1;
+  margin:auto;
+  cursor:pointer;
+}
+
+.swatch.selected{
+  box-shadow:0 0 0 3px var(--red);
+}
+
+.art,
+.accessory{
+  min-height:82px;
+  display:grid;
+  place-items:center;
+  font-size:28px;
+}
+
+.art small,
+.accessory small{
+  font-size:11px;
+}
+
+.summary{
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  margin:15px 0;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 14px;
+  border-bottom:1px solid #f3e6e8;
+  font-size:14px;
+}
+
+.row:last-child{
+  border:0;
+}
+
+.deposit{
+  text-align:center;
+  background:#fff6f6;
+  border:1px solid var(--line);
+  padding:18px;
+  border-radius:16px;
+}
+
+.deposit strong{
+  display:block;
+  color:var(--red);
+  font-size:32px;
+}
+
+.bank{
+  text-align:left;
+  margin-top:14px;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+
+.bank strong{
+  font-size:21px;
+  color:#8e0914;
+}
+
+.upload{
+  margin-top:15px;
+  border:2px dashed #d79ca2;
+  min-height:170px;
+  border-radius:16px;
+  background:#fffafa;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  overflow:hidden;
+  cursor:pointer;
+  color:var(--red);
+}
+
+.upload img{
+  width:100%;
+  max-height:300px;
+  object-fit:contain;
+}
+
+.upload input{
+  display:none;
+}
+
+.upload span{
+  font-size:36px;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+}
+
+.primary,
+.secondary{
+  flex:1;
+  padding:13px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.primary{
+  background:var(--red);
+  color:#fff;
+  border:1px solid var(--red);
+}
+
+.secondary{
+  background:white;
+  color:var(--red);
+  border:1px solid #c99096;
+}
+
+.primary:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.notice{
+  margin-top:14px;
+  background:#eef8f1;
+  color:#267346;
+  padding:12px;
+  border-radius:12px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.terms{
+  margin-top:18px;
+  background:var(--red);
+  color:#fff;
+  border-radius:16px;
+  padding:15px;
+  font-size:13px;
+}
+
+.terms h3{
+  margin:0;
+}
+
+.terms ul{
+  margin:6px 0 0;
+  padding-left:20px;
+}
+
+@media(max-width:700px){
+
+  .steps{
+    grid-template-columns:repeat(3,1fr);
+    row-gap:10px;
+  }
+
+  .swatches{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .grid.five{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .finger{
+    width:47px;
+    height:115px;
+  }
+
+  .nail{
+    width:35px;
+    height:65px;
+  }
+
+  .card{
+    padding:17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    maya <small>gal nails ♡</small>
+  </div>
+
+  <div>☰</div>
+</header>
+
+<main>
+
+<section class="intro">
+  <p>MAYA GAL NAILS</p>
+  <h1>ออกแบบลายเล็บในแบบของคุณ</h1>
+  <p>เลือกทุกองค์ประกอบ แล้วส่งแบบพร้อมหลักฐานมัดจำ</p>
+</section>
+
+<div class="steps" id="steps"></div>
+
+<section class="card" id="app"></section>
+
+</main>
+
+<script>
+
+const shapes = [
+  {id:"square",name:"ทรงเหลี่ยม"},
+  {id:"oval",name:"ทรงโอวอล"},
+  {id:"almond",name:"ทรงอัลมอนด์"},
+  {id:"coffin",name:"ทรงคอฟฟิน"},
+  {id:"round",name:"ทรงกลม"},
+  {id:"stiletto",name:"ทรงสติลเลตโต"}
+];
+
+const colors = [
+  {id:"wine",name:"แดงไวน์",v:"#9d0b18"},
+  {id:"red",name:"แดงสด",v:"#c51b2b"},
+  {id:"rose",name:"ชมพูโรส",v:"#ef9ca8"},
+  {id:"pink",name:"ชมพู",v:"#e98bad"},
+  {id:"nude",name:"นู้ด",v:"#d9a995"},
+  {id:"brown",name:"น้ำตาล",v:"#76564f"},
+  {id:"lavender",name:"ลาเวนเดอร์",v:"#9b91b8"},
+  {id:"purple",name:"ม่วง",v:"#44367f"},
+  {id:"blue",name:"ฟ้า",v:"#3b8ec9"},
+  {id:"green",name:"เขียว",v:"#3eaa87"},
+  {id:"mint",name:"มิ้นต์",v:"#88d1c1"},
+  {id:"black",name:"ดำ",v:"#161616"},
+  {id:"silver",name:"เงิน",v:"#c8c8c8"}
+];
+
+const arts = [
+  {id:"plain",name:"พื้น",icon:"●"},
+  {id:"line",name:"เส้น",icon:"╱"},
+  {id:"heart",name:"หัวใจ",icon:"♡"},
+  {id:"flower",name:"ดอกไม้",icon:"✿"},
+  {id:"bow",name:"โบว์",icon:"🎀"},
+  {id:"grid",name:"ตาราง",icon:"▦"},
+  {id:"dot",name:"จุด",icon:"•••"},
+  {id:"star",name:"ดาว",icon:"✦"},
+  {id:"fire",name:"เปลวไฟ",icon:"♨"}
+];
+
+const accessories = [
+  {id:"diamond",name:"เพชร",icon:"◇"},
+  {id:"pearl",name:"มุก",icon:"●"},
+  {id:"crystal",name:"คริสตัล",icon:"✦"},
+  {id:"flower",name:"ดอกไม้",icon:"✿"},
+  {id:"pink",name:"ชมพู",icon:"◆"},
+  {id:"bow",name:"โบว์",icon:"🎀"},
+  {id:"silver",name:"เงิน",icon:"❈"},
+  {id:"heart",name:"หัวใจ",icon:"♡"},
+  {id:"ring",name:"วงแหวน",icon:"◉"}
+];
+
+let step = 1;
+let slip = null;
+
+let design = {
+  shape: shapes[0],
+  color: colors[0],
+  art: arts[0],
+  accessory: accessories[0]
+};
+
+function $(selector){
+  return document.querySelector(selector);
+}
+
+function renderSteps(){
+
+  const labels = [
+    "รูปทรงเล็บ",
+    "โทนสี",
+    "ลายเพ้นท์",
+    "อะไหล่",
+    "ตรวจสอบ",
+    "วางมัดจำ"
+  ];
+
+  $("#steps").innerHTML = labels.map((label,index) => {
+
+    const number = index + 1;
+
+    return `
+      <div class="step
+        ${number === step ? "active" : ""}
+        ${number < step ? "done" : ""}
+      ">
+        <b>${number}</b>
+        ${label}
+      </div>
+    `;
+
+  }).join("");
+}
+
+function preview(){
+
+  return `
+    <div class="preview">
+
+      ${[0,1,2,3,4].map(index => `
+
+        <div class="finger">
+
+          <div
+            class="nail ${design.shape.id}"
+            style="background:${design.color.v}"
+          >
+
+            ${
+              design.art.id !== "plain"
+              ? design.art.icon
+              : ""
+            }
+
+            ${
+              index % 2 &&
+              design.accessory.id !== "diamond"
+
+              ? `
+                <small
+                  style="
+                    position:absolute;
+                    bottom:5px
+                  "
+                >
+                  ${design.accessory.icon}
+                </small>
+              `
+              : ""
+            }
+
+          </div>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+  `;
+}
+
+function actions(back,next,nextText="ถัดไป"){
+
+  return `
+    <div class="actions">
+
+      ${
+        back
+        ? `
+          <button
+            class="secondary"
+            onclick="go(${back})"
+          >
+            ย้อนกลับ
+          </button>
+        `
+        : ""
+      }
+
+      ${
+        next
+        ? `
+          <button
+            class="primary"
+            onclick="go(${next})"
+          >
+            ${nextText}
+          </button>
+        `
+        : ""
+      }
+
+    </div>
+  `;
+}
+
+function render(){
+
+  renderSteps();
+
+  let html = "";
+
+  /* STEP 1 */
+
+  if(step === 1){
+
+    html = `
+      ${preview()}
+
+      <h2>เลือกรูปทรงเล็บที่ต้องการ</h2>
+
+      <div class="grid">
+
+        ${
+          shapes.map(item => `
+
+            <button
+              class="option ${
+                item.id === design.shape.id
+                ? "selected"
+                : ""
+              }"
+              onclick="choose('shape','${item.id}')"
+            >
+
+              <span
+                class="shape-icon ${item.id}"
+              ></span>
+
+              ${item.name}
+
+            </button>
+
+          `).join("")
+        }
+
+      </div>
+
+      ${actions(null,2)}
+    `;
+  }
+
+  /* STEP 2 */
+
+  if(step === 2){
+
+    html = `
+
+      <h2>เลือกโทนสีที่ต้องการ</h2>
+
+      <div class="swatches">
+
+        ${
+          colors.map(item => `
+
+            <button
+              title="${item.name}"
+              class="swatch ${
+                item.id === design.color.id
+                ? "selected"
+                : ""
+              }"
+              style="background:${item.v}"
+              onclick="choose('color','${item.id}')"
+            ></button>
+
+          `).join("")
+        }
+
+      </div>
+
+      ${preview()}
+
+      ${actions(1,3)}
+
+    `;
+  }
+
+  /* STEP 3 */
+
+  if(step === 3){
+
+    html = `
+
+      <h2>เลือกลายเพ้นท์ที่ต้องการ</h2>
+
+      <div class="grid five">
+
+        ${
+          arts.map(item => `
+
+            <button
+              class="option art ${
+                item.id === design.art.id
+                ? "selected"
+                : ""
+              }"
+              onclick="choose('art','${item.id}')"
+            >
+
+              ${item.icon}
+
+              <small>
+                ${item.name}
+              </small>
+
+            </button>
+
+          `).join("")
+        }
+
+      </div>
+
+      ${preview()}
+
+      ${actions(2,4)}
+
+    `;
+  }
+
+  /* STEP 4 */
+
+  if(step === 4){
+
+    html = `
+
+      ${preview()}
+
+      <h2>เลือกอะไหล่ที่ต้องการ</h2>
+
+      <div class="grid five">
+
+        ${
+          accessories.map(item => `
+
+            <button
+              class="option accessory ${
+                item.id === design.accessory.id
+                ? "selected"
+                : ""
+              }"
+              onclick="choose('accessory','${item.id}')"
+            >
+
+              ${item.icon}
+
+              <small>
+                ${item.name}
+              </small>
+
+            </button>
+
+          `).join("")
+        }
+
+      </div>
+
+      ${actions(3,5,"ตรวจสอบแบบ")}
+
+    `;
+  }
+
+  /* STEP 5 */
+
+  if(step === 5){
+
+    html = `
+
+      <h2>ตรวจสอบแบบลายเล็บของคุณ</h2>
+
+      ${preview()}
+
+      <div class="summary">
+
+        <div class="row">
+          <span>รูปทรงเล็บ</span>
+          <b>${design.shape.name}</b>
+        </div>
+
+        <div class="row">
+          <span>โทนสี</span>
+          <b>${design.color.name}</b>
+        </div>
+
+        <div class="row">
+          <span>ลายเพ้นท์</span>
+          <b>${design.art.name}</b>
+        </div>
+
+        <div class="row">
+          <span>อะไหล่</span>
+          <b>${design.accessory.name}</b>
+        </div>
+
+      </div>
+
+      ${actions(4,6,"ยืนยันแบบและวางมัดจำ")}
+
+    `;
+  }
+
+  /* STEP 6 */
+
+  if(step === 6){
+
+    html = `
+
+      <h2>
+        วางมัดจำเพื่อยืนยันการจองคิว
+      </h2>
+
+      <div class="deposit">
+
+        จำนวนเงินมัดจำ
+
+        <strong>
+          500 บาท
+        </strong>
+
+      </div>
+
+      <div class="bank">
+
+        <small>
+          โอนเงินเข้าบัญชี
+        </small>
+
+        <strong>
+          999-9-99999-9
+        </strong>
+
+        <br>
+
+        <b>
+          MAYA GAL NAILS
+        </b>
+
+      </div>
+
+      <p>
+        หลังโอนเงิน กรุณาแนบสลิปเป็นรูปภาพ
+        เพื่อยืนยันการจองคิว
+      </p>
+
+      <label
+        class="upload"
+        id="upload"
+      >
+
+        <input
+          id="slipInput"
+          type="file"
+          accept="image/*"
+        >
+
+        <span>⇧</span>
+
+        <b>
+          แนบสลิปโอนเงิน
+        </b>
+
+        <small>
+          แตะเพื่อเลือกรูปภาพ
+        </small>
+
+      </label>
+
+      ${
+        slip
+        ? `
+          <div class="notice">
+            ✓ แนบสลิปเรียบร้อยแล้ว:
+            ${slip.name}
+          </div>
+        `
+        : ""
+      }
+
+      <div class="actions">
+
+        <button
+          class="secondary"
+          onclick="go(5)"
+        >
+          ย้อนกลับ
+        </button>
+
+        <button
+          class="primary"
+          ${slip ? "" : "disabled"}
+          onclick="confirmPayment()"
+        >
+          ยืนยันการชำระเงิน
+        </button>
+
+      </div>
+
+      <div class="terms">
+
+        <h3>
+          เงื่อนไขการวางมัดจำ
+        </h3>
+
+        <ul>
+
+          <li>
+            มัดจำ 500 บาท / คิว
+          </li>
+
+          <li>
+            มัดจำไม่สามารถคืนได้
+            หากยกเลิกกะทันหัน
+          </li>
+
+          <li>
+            กรุณาแนบสลิปหลังชำระเงิน
+            เพื่อยืนยันคิว
+          </li>
+
+        </ul>
+
+      </div>
+
+    `;
+  }
+
+  $("#app").innerHTML = html;
+
+  const input = $("#slipInput");
+
+  if(input){
+
+    input.addEventListener(
+      "change",
+      handleSlip
+    );
+
+  }
+
+}
+
+function choose(type,id){
+
+  const lists = {
+    shape: shapes,
+    color: colors,
+    art: arts,
+    accessory: accessories
+  };
+
+  const item = lists[type].find(
+    item => item.id === id
+  );
+
+  if(item){
+
+    design[type] = item;
+
+  }
+
+  render();
+}
+
+function go(number){
+
+  step = number;
+
+  render();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+function handleSlip(event){
+
+  const file =
+    event.target.files?.[0];
+
+  if(
+    !file ||
+    !file.type.startsWith("image/")
+  ){
+    return;
+  }
+
+  slip = file;
+
+  const reader =
+    new FileReader();
+
+  reader.onload = () => {
+
+    const box = $("#upload");
+
+    if(
+      box &&
+      typeof reader.result === "string"
+    ){
+
+      box.innerHTML = `
+
+        <input
+          id="slipInput"
+          type="file"
+          accept="image/*"
+        >
+
+        <img
+          src="${reader.result}"
+          alt="สลิปโอนเงิน"
+        >
+
+      `;
+
+    }
+
+  };
+
+  reader.readAsDataURL(file);
+
+  render();
+}
+
+function confirmPayment(){
+
+  const booking = {
+
+    shop:"MAYA GAL NAILS",
+
+    shape:design.shape.name,
+
+    color:design.color.name,
+
+    art:design.art.name,
+
+    accessory:design.accessory.name,
+
+    deposit:500,
+
+    account:"999-9-99999-9",
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+  localStorage.setItem(
+    "mayaGalNailsBooking",
+    JSON.stringify(booking)
+  );
+
+  $("#app").innerHTML = `
+
+    <div
+      style="
+        text-align:center;
+        padding:35px 10px
+      "
+    >
+
+      <div
+        style="
+          font-size:58px;
+          color:#a90d18
+        "
+      >
+        ✓
+      </div>
+
+      <h2>
+        ส่งข้อมูลการจองเรียบร้อยแล้ว
+      </h2>
+
+      <p>
+        ร้าน maya gal nails
+        ได้รับข้อมูลแบบลายเล็บ
+        และหลักฐานมัดจำของคุณแล้ว
+      </p>
+
+      <div class="summary">
+
+        <div class="row">
+          <span>ยอดมัดจำ</span>
+          <b>500 บาท</b>
+        </div>
+
+        <div class="row">
+          <span>เลขบัญชี</span>
+          <b>999-9-99999-9</b>
+        </div>
+
+      </div>
+
+      <button
+        class="primary"
+        onclick="location.reload()"
+      >
+        ออกแบบใหม่
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+render();
+
+</script>
+
+</body>
+</html>
